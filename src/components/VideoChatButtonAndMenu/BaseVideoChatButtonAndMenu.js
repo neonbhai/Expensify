@@ -67,20 +67,6 @@ const BaseVideoChatButtonAndMenu = (props) => {
         });
     }
 
-    function handleButtonPress() {
-        Session.checkIfActionIsAllowed(() => {
-            // Drop focus to avoid blue focus ring.
-            videoChatButtonRef.current.blur();
-
-            // If this is the Concierge chat, we'll open the modal for requesting a setup call instead
-            if (props.isConcierge && props.guideCalendarLink) {
-                Linking.openURL(props.guideCalendarLink);
-                return;
-            }
-            setMenuVisibility(true);
-        });
-    }
-
     function closePopover() {
         setMenuVisibility(false);
     }
@@ -104,7 +90,17 @@ const BaseVideoChatButtonAndMenu = (props) => {
                 <Tooltip text={props.translate('videoChatButtonAndMenu.tooltip')}>
                     <PressableWithoutFeedback
                         ref={videoChatButtonRef}
-                        onPress={handleButtonPress}
+                        onPress={Session.checkIfActionIsAllowed(() => {
+                            // Drop focus to avoid blue focus ring.
+                            videoChatButtonRef.current.blur();
+
+                            // If this is the Concierge chat, we'll open the modal for requesting a setup call instead
+                            if (props.isConcierge && props.guideCalendarLink) {
+                                Linking.openURL(props.guideCalendarLink);
+                                return;
+                            }
+                            setMenuVisibility(true);
+                        })}
                         style={styles.touchableButtonImage}
                         accessibilityLabel={props.translate('videoChatButtonAndMenu.tooltip')}
                         accessibilityRole="button"
