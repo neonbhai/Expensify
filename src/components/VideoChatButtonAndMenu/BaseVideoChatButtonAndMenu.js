@@ -1,5 +1,5 @@
 import _ from 'underscore';
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, useCallback} from 'react';
 import {View, Dimensions, Linking} from 'react-native';
 import PropTypes from 'prop-types';
 import Icon from '../Icon';
