@@ -55,9 +55,9 @@ function BaseVideoChatButtonAndMenu (props) {
     ];
 
     /**
-     * This gets called onLayout to find the cooridnates of the wrapper for the video chat button.
+     * This gets called onLayout to find the coordinates of the wrapper for the video chat button.
      */
-    function measureVideoChatIconPosition() {
+    const measureVideoChatIconPosition = useCallback(() => {
         if (!videoChatIconWrapperRef.current) {
             return;
         }
@@ -65,11 +65,11 @@ function BaseVideoChatButtonAndMenu (props) {
         videoChatIconWrapperRef.current.measureInWindow((x, y) => {
             setVideoChatIconPosition({x, y});
         });
-    }
+    },[]);
 
-    function closePopover() {
+    const closePopover = useCallback(() => {
         setMenuVisibility(false);
-    }
+    }, [])
 
     useEffect(() => {
         dimensionsEventListenerRef.current = Dimensions.addEventListener('change', measureVideoChatIconPosition);
