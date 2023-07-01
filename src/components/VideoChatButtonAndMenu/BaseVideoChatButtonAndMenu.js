@@ -81,6 +81,10 @@ const BaseVideoChatButtonAndMenu = (props) => {
         });
     }
 
+    function closePopover() {
+        setMenuVisibility(false);
+    }
+
     useEffect(() => {
         dimensionsEventListenerRef.current = Dimensions.addEventListener('change', measureVideoChatIconPosition);
 
@@ -114,7 +118,7 @@ const BaseVideoChatButtonAndMenu = (props) => {
             </View>
 
             <Popover
-                onClose={() => setMenuVisibility(false)}
+                onClose={closePopover}
                 isVisible={isVideoChatMenuActive}
                 anchorPosition={{
                     left: videoChatIconPosition.x - 150,
