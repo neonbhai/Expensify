@@ -28,7 +28,7 @@ const propTypes = {
     ...windowDimensionsPropTypes,
 };
 
-const BaseVideoChatButtonAndMenu = (props) => {
+function BaseVideoChatButtonAndMenu (props) {
     const [isVideoChatMenuActive, setMenuVisibility] = useState(false);
     const [videoChatIconPosition, setVideoChatIconPosition] = useState({x: 0, y: 0});
     const videoChatIconWrapperRef = useRef(null);
