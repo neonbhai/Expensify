@@ -81,7 +81,7 @@ function BaseVideoChatButtonAndMenu (props) {
 
             dimensionsEventListenerRef.current.remove();
         };
-    }, []);
+    }, [measureVideoChatIconPosition]);
 
     return (
         <>
