@@ -75,9 +75,11 @@ function BaseVideoChatButtonAndMenu (props) {
         dimensionsEventListenerRef.current = Dimensions.addEventListener('change', measureVideoChatIconPosition);
 
         return () => {
-            if (dimensionsEventListenerRef.current) {
-                dimensionsEventListenerRef.current.remove();
+            if (!dimensionsEventListenerRef.current) {
+                return;
             }
+
+            dimensionsEventListenerRef.current.remove();
         };
     }, []);
 
