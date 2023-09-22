@@ -29,6 +29,9 @@ const propTypes = {
     /** Animated opacity value while the label is in active state */
     // eslint-disable-next-line
     activeOpacity: PropTypes.any,
+
+    /** Whether the tab is active */
+    isFocused: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -42,7 +45,7 @@ const defaultProps = {
 
 const AnimatedPressableWithFeedback = Animated.createAnimatedComponent(PressableWithFeedback);
 
-function TabSelectorItem({icon, title, onPress, backgroundColor, activeOpacity, inactiveOpacity}) {
+function TabSelectorItem({icon, title, onPress, backgroundColor, activeOpacity, inactiveOpacity, isFocused}) {
     return (
         <Hoverable>
             {(isHovered) => (
