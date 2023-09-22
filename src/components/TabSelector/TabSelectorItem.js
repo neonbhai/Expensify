@@ -5,6 +5,7 @@ import styles from '../../styles/styles';
 import PressableWithFeedback from '../Pressable/PressableWithFeedback';
 import TabIcon from './TabIcon';
 import TabLabel from './TabLabel';
+import Hoverable from '../Hoverable';
 
 const propTypes = {
     /** Function to call when onPress */
@@ -42,23 +43,27 @@ const AnimatedPressableWithFeedback = Animated.createAnimatedComponent(Pressable
 
 function TabSelectorItem({icon, title, onPress, backgroundColor, activeOpacity, inactiveOpacity}) {
     return (
-        <AnimatedPressableWithFeedback
-            accessibilityLabel={title}
-            style={[styles.tabSelectorButton, {backgroundColor}]}
-            wrapperStyle={[styles.flex1]}
-            onPress={onPress}
-        >
-            <TabIcon
-                icon={icon}
-                activeOpacity={activeOpacity}
-                inactiveOpacity={inactiveOpacity}
-            />
-            <TabLabel
-                title={title}
-                activeOpacity={activeOpacity}
-                inactiveOpacity={inactiveOpacity}
-            />
-        </AnimatedPressableWithFeedback>
+        <Hoverable>
+            {(isHovered) => (
+                <AnimatedPressableWithFeedback
+                    accessibilityLabel={title}
+                    style={[styles.tabSelectorButton, {backgroundColor}]}
+                    wrapperStyle={[styles.flex1]}
+                    onPress={onPress}
+                >
+                    <TabIcon
+                        icon={icon}
+                        activeOpacity={activeOpacity}
+                        inactiveOpacity={inactiveOpacity}
+                    />
+                    <TabLabel
+                        title={title}
+                        activeOpacity={activeOpacity}
+                        inactiveOpacity={inactiveOpacity}
+                    />
+                </AnimatedPressableWithFeedback>
+            )}
+        </Hoverable>
     );
 }
 
