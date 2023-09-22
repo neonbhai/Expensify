@@ -2,6 +2,7 @@ import {Animated} from 'react-native';
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from '../../styles/styles';
+import themeColors from '../../styles/themes/default';
 import PressableWithFeedback from '../Pressable/PressableWithFeedback';
 import TabIcon from './TabIcon';
 import TabLabel from './TabLabel';
@@ -47,7 +48,7 @@ function TabSelectorItem({icon, title, onPress, backgroundColor, activeOpacity, 
             {(isHovered) => (
                 <AnimatedPressableWithFeedback
                     accessibilityLabel={title}
-                    style={[styles.tabSelectorButton, {backgroundColor}]}
+                    style={[styles.tabSelectorButton, (isHovered) ? {backgroundColor: themeColors.highlightBG} : {backgroundColor}]}
                     wrapperStyle={[styles.flex1]}
                     onPress={onPress}
                 >
