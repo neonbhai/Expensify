@@ -51,7 +51,7 @@ function TabSelectorItem({icon, title, onPress, backgroundColor, activeOpacity, 
             {(isHovered) => (
                 <AnimatedPressableWithFeedback
                     accessibilityLabel={title}
-                    style={[styles.tabSelectorButton, (isHovered) ? {backgroundColor: themeColors.highlightBG} : {backgroundColor}]}
+                    style={[styles.tabSelectorButton, isHovered && !isFocused ? {backgroundColor: themeColors.highlightBG} : {backgroundColor}]}
                     wrapperStyle={[styles.flex1]}
                     onPress={onPress}
                 >
