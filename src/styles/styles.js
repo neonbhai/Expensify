@@ -3432,7 +3432,7 @@ const styles = (theme) => ({
         marginLeft: 8,
         fontFamily: fontFamily.EXP_NEUE_BOLD,
         fontWeight: fontWeightBold,
-        color: isSelected && isHovered ? theme.textLight : theme.textSupporting,
+        color: isSelected || isHovered ? theme.textLight : theme.textSupporting,
     }),
 
     /**
