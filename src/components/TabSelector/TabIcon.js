@@ -32,7 +32,7 @@ function TabIcon({icon, activeOpacity, inactiveOpacity, isHovered}) {
             <Animated.View style={{opacity: inactiveOpacity}}>
                 <Icon
                     src={icon}
-                    fill={themeColors.icon}
+                    fill={isHovered ? themeColors.iconMenu : themeColors.icon}
                 />
             </Animated.View>
             <Animated.View style={[StyleSheet.absoluteFill, {opacity: activeOpacity}]}>
