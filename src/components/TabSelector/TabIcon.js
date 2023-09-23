@@ -15,6 +15,9 @@ const propTypes = {
     /** Animated opacity value while the label is in active state */
     // eslint-disable-next-line
     activeOpacity: PropTypes.any,
+
+    /** Whether the tab is Hovered */
+    isHovered: PropTypes.bool,
 };
 
 const defaultProps = {
@@ -23,7 +26,7 @@ const defaultProps = {
     activeOpacity: 0,
 };
 
-function TabIcon({icon, activeOpacity, inactiveOpacity}) {
+function TabIcon({icon, activeOpacity, inactiveOpacity, isHovered}) {
     return (
         <View>
             <Animated.View style={{opacity: inactiveOpacity}}>

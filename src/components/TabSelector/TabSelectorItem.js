@@ -59,6 +59,7 @@ function TabSelectorItem({icon, title, onPress, backgroundColor, activeOpacity, 
                         icon={icon}
                         activeOpacity={activeOpacity}
                         inactiveOpacity={inactiveOpacity}
+                        isHovered={isHovered}
                     />
                     <TabLabel
                         title={title}
