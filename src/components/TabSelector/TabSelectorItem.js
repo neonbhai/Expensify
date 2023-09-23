@@ -65,6 +65,7 @@ function TabSelectorItem({icon, title, onPress, backgroundColor, activeOpacity, 
                         title={title}
                         activeOpacity={activeOpacity}
                         inactiveOpacity={inactiveOpacity}
+                        isHovered={isHovered}
                     />
                 </AnimatedPressableWithFeedback>
             )}
