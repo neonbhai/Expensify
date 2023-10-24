@@ -82,13 +82,13 @@ Onyx.connect({
 
 const draftInviteMessageMap = {};
 Onyx.connect({
-    key: ONYXKEYS.COLLECTION.PRIVATE_NOTES_DRAFT,
+    key: ONYXKEYS.COLLECTION.WORKSPACE_INVITE_MESSAGE_DRAFT,
     callback: (value, key) => {
         if (!key) {
             return;
         }
 
-        const policyID = key.replace(ONYXKEYS.COLLECTION.PRIVATE_NOTES_DRAFT, '');
+        const policyID = key.replace(ONYXKEYS.COLLECTION.WORKSPACE_INVITE_MESSAGE_DRAFT, '');
         draftInviteMessageMap[policyID] = value;
     },
 });
