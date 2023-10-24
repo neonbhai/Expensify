@@ -96,6 +96,7 @@ Onyx.connect({
 function getDraftInviteMessage(policyID) {
     return draftInviteMessageMap[policyID];
 }
+
 /**
  * Stores in Onyx the policy ID of the last workspace that was accessed by the user
  * @param {String|null} policyID
@@ -1284,7 +1285,11 @@ function setWorkspaceInviteMembersDraft(policyID, invitedEmailsToAccountIDs) {
 
 function saveInviteMessageDraft(policyID, draftNote) {
     Onyx.merge(`${ONYXKEYS.COLLECTION.WORKSPACE_INVITE_MESSAGE_DRAFT}${policyID}`, draftNote);
-  }
+}
+
+function resetInviteMessageDraft(policyID) {
+    Onyx.merge(`${ONYXKEYS.COLLECTION.WORKSPACE_INVITE_MESSAGE_DRAFT}${policyID}`, null);
+}
 
 /**
  * @param {String} policyID
@@ -1342,4 +1347,5 @@ export {
     createDraftInitialWorkspace,
     saveInviteMessageDraft,
     getDraftInviteMessage,
+    resetInviteMessageDraft,
 };

@@ -75,8 +75,9 @@ class WorkspaceInviteMessagePage extends React.Component {
         this.sendInvitation = this.sendInvitation.bind(this);
         this.validate = this.validate.bind(this);
         this.openPrivacyURL = this.openPrivacyURL.bind(this);
+        this.debouncedSavePrivateNote = this.debouncedSavePrivateNote.bind(this);
         this.state = {
-            welcomeNote: this.getDefaultWelcomeNote(),
+            welcomeNote: Policy.getDraftInviteMessage(this.props.route.params.policyID) || this.getDefaultWelcomeNote(),
         };
     }
 
@@ -121,6 +122,7 @@ class WorkspaceInviteMessagePage extends React.Component {
         Keyboard.dismiss();
         Policy.addMembersToWorkspace(this.props.invitedEmailsToAccountIDsDraft, this.state.welcomeNote, this.props.route.params.policyID);
         Policy.setWorkspaceInviteMembersDraft(this.props.route.params.policyID, {});
+        Policy.resetInviteMessageDraft(this.props.route.params.policyID);
         // Pop the invite message page before navigating to the members page.
         Navigation.goBack(ROUTES.HOME);
         Navigation.navigate(ROUTES.WORKSPACE_MEMBERS.getRoute(this.props.route.params.policyID));
@@ -153,6 +155,12 @@ class WorkspaceInviteMessagePage extends React.Component {
         }
         return errorFields;
     }
+
+    debouncedSavePrivateNote = 
+        _.debounce((text) => {
+            console.log("debounce ran. saving private note: ", text);
+            Policy.saveInviteMessageDraft(this.props.route.params.policyID, text);
+        }, 1000);
 
     render() {
         const policyName = lodashGet(this.props.policy, 'name');
@@ -227,7 +235,10 @@ class WorkspaceInviteMessagePage extends React.Component {
                                 containerStyles={[styles.autoGrowHeightMultilineInput]}
                                 defaultValue={this.state.welcomeNote}
                                 value={this.state.welcomeNote}
-                                onChangeText={(text) => this.setState({welcomeNote: text})}
+                                onChangeText={(text) => {
+                                    this.debouncedSavePrivateNote(text);
+                                    this.setState({welcomeNote: text})
+                                }}
                             />
                         </View>
                     </Form>
