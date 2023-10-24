@@ -80,6 +80,22 @@ Onyx.connect({
     callback: (val) => (networkStatus = val),
 });
 
+const draftInviteMessageMap = {};
+Onyx.connect({
+    key: ONYXKEYS.COLLECTION.PRIVATE_NOTES_DRAFT,
+    callback: (value, key) => {
+        if (!key) {
+            return;
+        }
+
+        const policyID = key.replace(ONYXKEYS.COLLECTION.PRIVATE_NOTES_DRAFT, '');
+        draftInviteMessageMap[policyID] = value;
+    },
+});
+
+function getDraftInviteMessage(policyID) {
+    return draftInviteMessageMap[policyID];
+}
 /**
  * Stores in Onyx the policy ID of the last workspace that was accessed by the user
  * @param {String|null} policyID
@@ -1325,4 +1341,5 @@ export {
     buildOptimisticPolicyRecentlyUsedCategories,
     createDraftInitialWorkspace,
     saveInviteMessageDraft,
+    getDraftInviteMessage,
 };
