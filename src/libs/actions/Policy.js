@@ -1266,6 +1266,10 @@ function setWorkspaceInviteMembersDraft(policyID, invitedEmailsToAccountIDs) {
     Onyx.set(`${ONYXKEYS.COLLECTION.WORKSPACE_INVITE_MEMBERS_DRAFT}${policyID}`, invitedEmailsToAccountIDs);
 }
 
+function saveInviteMessageDraft(policyID, draftNote) {
+    Onyx.merge(`${ONYXKEYS.COLLECTION.WORKSPACE_INVITE_MESSAGE_DRAFT}${policyID}`, draftNote);
+  }
+
 /**
  * @param {String} policyID
  */
@@ -1320,4 +1324,5 @@ export {
     openDraftWorkspaceRequest,
     buildOptimisticPolicyRecentlyUsedCategories,
     createDraftInitialWorkspace,
+    saveInviteMessageDraft,
 };
