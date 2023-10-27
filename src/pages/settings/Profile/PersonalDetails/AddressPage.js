@@ -147,6 +147,7 @@ function AddressPage({privatePersonalDetails, route}) {
             setCurrentCountry(value);
             setState('');
             setCity('');
+            setZip('');
             return;
         }
         if (key === 'state') {
