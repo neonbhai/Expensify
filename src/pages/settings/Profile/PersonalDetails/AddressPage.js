@@ -81,7 +81,8 @@ function AddressPage({privatePersonalDetails, route}) {
     const [street1, street2] = (address.street || '').split('\n');
     const [state, setState] = useState(address.state);
     const [city, setCity] = useState(address.city);
-
+    const [zip, setZip] = useState(address.zip);
+    
     useEffect(() => {
         if (!address) {
             return;
@@ -89,6 +90,8 @@ function AddressPage({privatePersonalDetails, route}) {
         setState(address.state);
         setCurrentCountry(address.country);
         setCity(address.city);
+        setZip(address.zip);
+        console.log("address", address);
     }, [address]);
 
     /**
@@ -137,7 +140,7 @@ function AddressPage({privatePersonalDetails, route}) {
     }, []);
 
     const handleAddressChange = useCallback((value, key) => {
-        if (key !== 'country' && key !== 'state' && key !== 'city') {
+        if (key !== 'country' && key !== 'state' && key !== 'city' && key !== 'zipPostCode') {
             return;
         }
         if (key === 'country') {
@@ -150,7 +153,11 @@ function AddressPage({privatePersonalDetails, route}) {
             setState(value);
             return;
         }
-        setCity(value);
+        if (key === 'city') {
+            setCity(value);
+            return;
+        }
+        setZip(value);
     }, []);
 
     useEffect(() => {
@@ -254,9 +261,10 @@ function AddressPage({privatePersonalDetails, route}) {
                         accessibilityLabel={translate('common.zipPostCode')}
                         accessibilityRole={CONST.ACCESSIBILITY_ROLE.TEXT}
                         autoCapitalize="characters"
-                        defaultValue={address.zip || ''}
+                        value={zip || ''}
                         maxLength={CONST.BANK_ACCOUNT.MAX_LENGTH.ZIP_CODE}
                         hint={zipFormat}
+                        onValueChange={handleAddressChange}
                     />
                 </Form>
             )}
