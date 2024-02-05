@@ -217,6 +217,7 @@ const SCREENS = {
         ROOT: 'NewChat_Root',
         NEW_CHAT: 'chat',
         NEW_ROOM: 'room',
+        WORKSPACE_OPTIONS: 'Workspace_Options',
     },
 
     SPLIT_DETAILS: {
