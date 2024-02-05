@@ -328,6 +328,10 @@ const linkingConfig: LinkingOptions<RootStackParamList> = {
                                     },
                                 },
                             },
+                            [SCREENS.NEW_CHAT.WORKSPACE_OPTIONS]: {
+                                path: ROUTES.NEW_CHAT_WORKSPACE_OPTIONS.route,
+                                exact: true,
+                            },
                         },
                     },
                     [SCREENS.RIGHT_MODAL.NEW_TASK]: {
