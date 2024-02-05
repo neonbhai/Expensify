@@ -15,6 +15,7 @@ import ScreenWrapper from '@components/ScreenWrapper';
 import TextInput from '@components/TextInput';
 import ValuePicker from '@components/ValuePicker';
 import withNavigationFocus from '@components/withNavigationFocus';
+import WorkspaceSelector from '@components/WorkspaceSelector';
 import useAutoFocusInput from '@hooks/useAutoFocusInput';
 import useLocalize from '@hooks/useLocalize';
 import useNetwork from '@hooks/useNetwork';
@@ -315,12 +316,9 @@ function WorkspaceNewRoomPage(props) {
                             </View>
                             <View style={[styles.mhn5]}>
                                 <InputWrapper
-                                    InputComponent={ValuePicker}
+                                    InputComponent={WorkspaceSelector}
                                     inputID="policyID"
-                                    label={translate('workspace.common.workspace')}
-                                    items={workspaceOptions}
                                     value={policyID}
-                                    onValueChange={setPolicyID}
                                 />
                             </View>
                             {isPolicyAdmin && (
