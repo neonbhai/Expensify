@@ -1,6 +1,6 @@
 import lodashGet from 'lodash/get';
 import PropTypes from 'prop-types';
-import React, {useCallback, useMemo} from 'react';
+import React, {useCallback, useMemo, useEffect} from 'react';
 import _ from 'underscore';
 import HeaderWithBackButton from '@components/HeaderWithBackButton';
 import ScreenWrapper from '@components/ScreenWrapper';
@@ -54,8 +54,9 @@ function WorkspaceOptionsPage({route, navigation, policies}) {
         () =>
             _.map(PolicyUtils.getActivePolicies(policies), (policy) => ({
                 label: policy.name,
-                key: policy.id,
+                keyForList: policy.id,
                 value: policy.id,
+                text: policy.name,
             })),
         [policies],
     );
@@ -95,7 +96,7 @@ function WorkspaceOptionsPage({route, navigation, policies}) {
             />
 
             <SelectionList
-                sections={[{data: workspaceOptions}]}
+                sections={[{data: workspaceOptions, indexOffset: 0}]}
                 onSelectRow={selectWorkspace}
                 initiallyFocusedOptionKey={selectedWorkspace}
                 shouldUseDynamicMaxToRenderPerBatch
