@@ -154,6 +154,10 @@ const ROUTES = {
     NEW: 'new',
     NEW_CHAT: 'new/chat',
     NEW_ROOM: 'new/room',
+    NEW_CHAT_WORKSPACE_OPTIONS: {
+        route: 'new/room/workspace-options',
+        getRoute: (workspace: string, backTo?: string) => getUrlWithBackToParam(`new/room/workspace-options?workspace=${workspace}`, backTo),
+    },
 
     REPORT: 'r',
     REPORT_WITH_ID: {
