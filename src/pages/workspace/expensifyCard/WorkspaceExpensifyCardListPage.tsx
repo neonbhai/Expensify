@@ -10,7 +10,7 @@ import HeaderWithBackButton from '@components/HeaderWithBackButton';
 import * as Expensicons from '@components/Icon/Expensicons';
 import * as Illustrations from '@components/Icon/Illustrations';
 import OfflineWithFeedback from '@components/OfflineWithFeedback';
-import {PressableWithoutFeedback} from '@components/Pressable';
+import {PressableWithFeedback} from '@components/Pressable';
 import ScreenWrapper from '@components/ScreenWrapper';
 import useLocalize from '@hooks/useLocalize';
 import useResponsiveLayout from '@hooks/useResponsiveLayout';
@@ -122,24 +122,23 @@ function WorkspaceExpensifyCardListPage({route}: WorkspaceExpensifyCardListPageP
             errors={item.errors}
             contentContainerStyle={styles.mb3}
         >
-            <PressableWithoutFeedback
+            <PressableWithFeedback
                 role={CONST.ROLE.BUTTON}
                 accessibilityLabel="row"
                 onPress={() => {}} // TODO: add navigation action when card details screen is implemented (https://github.com/Expensify/App/issues/44325)
                 style={[styles.selectionListPressableItemWrapper]}
+                hoverStyle={[styles.hoveredComponentBG]}
             >
-                {({hovered}) => (
-                    <WorkspaceCardListRow
-                        style={hovered && styles.hoveredComponentBG}
-                        lastFourPAN={item.lastFourPAN ?? ''}
-                        // @ts-expect-error TODO: change cardholder to accountID and get personal details with it
-                        cardholder={item.cardholder}
-                        limit={item.nameValuePairs?.unapprovedExpenseLimit ?? 0}
-                        name={item.nameValuePairs?.cardTitle ?? ''}
-                        currency={policyCurrency}
-                    />
-                )}
-            </PressableWithoutFeedback>
+                <WorkspaceCardListRow
+                
+                    lastFourPAN={item.lastFourPAN ?? ''}
+                    // @ts-expect-error TODO: change cardholder to accountID and get personal details with it
+                    cardholder={item.cardholder}
+                    limit={item.nameValuePairs?.unapprovedExpenseLimit ?? 0}
+                    name={item.nameValuePairs?.cardTitle ?? ''}
+                    currency={policyCurrency}
+                />
+            </PressableWithFeedback>
         </OfflineWithFeedback>
     );
 

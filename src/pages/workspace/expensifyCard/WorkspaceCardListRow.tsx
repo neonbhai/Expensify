@@ -14,7 +14,7 @@ import type {PersonalDetails} from '@src/types/onyx';
 
 type WorkspacesListRowProps = {
     /** Additional styles applied to the row */
-    style: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
 
     /** The last four digits of the card */
     lastFourPAN: string;
@@ -32,14 +32,14 @@ type WorkspacesListRowProps = {
     currency: string;
 };
 
-function WorkspaceCardListRow({style, limit, cardholder, lastFourPAN, name, currency}: WorkspacesListRowProps) {
+function WorkspaceCardListRow({limit, cardholder, lastFourPAN, name, currency, style = {}}: WorkspacesListRowProps) {
     const {shouldUseNarrowLayout} = useResponsiveLayout();
     const styles = useThemeStyles();
 
     const cardholderName = useMemo(() => PersonalDetailsUtils.getDisplayNameOrDefault(cardholder), [cardholder]);
 
     return (
-        <View style={[styles.flexRow, styles.flex1, styles.justifyContentBetween, styles.userSelectNone, styles.alignItemsCenter]}>
+        <View style={[styles.flexRow, styles.flex1, styles.justifyContentBetween, styles.userSelectNone, styles.alignItemsCenter, style]}>
             <View style={[styles.flexRow, styles.flex5, styles.gap3]}>
                 <Avatar
                     source={getDefaultAvatarURL(cardholder.accountID)}
