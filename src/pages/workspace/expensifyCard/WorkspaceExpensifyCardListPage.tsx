@@ -120,11 +120,13 @@ function WorkspaceExpensifyCardListPage({route}: WorkspaceExpensifyCardListPageP
             key={`${item.nameValuePairs?.cardTitle}_${index}`}
             errorRowStyles={styles.ph5}
             errors={item.errors}
+            contentContainerStyle={styles.mb3}
         >
             <PressableWithoutFeedback
                 role={CONST.ROLE.BUTTON}
                 accessibilityLabel="row"
                 onPress={() => {}} // TODO: add navigation action when card details screen is implemented (https://github.com/Expensify/App/issues/44325)
+                style={[styles.selectionListPressableItemWrapper]}
             >
                 {({hovered}) => (
                     <WorkspaceCardListRow

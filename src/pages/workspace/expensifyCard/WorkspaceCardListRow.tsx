@@ -39,8 +39,8 @@ function WorkspaceCardListRow({style, limit, cardholder, lastFourPAN, name, curr
     const cardholderName = useMemo(() => PersonalDetailsUtils.getDisplayNameOrDefault(cardholder), [cardholder]);
 
     return (
-        <View style={[styles.flexRow, styles.highlightBG, styles.mh5, styles.mb3, styles.gap5, styles.br3, styles.p4, style]}>
-            <View style={[styles.flexRow, styles.flex5, styles.gap3, styles.alignItemsCenter]}>
+        <View style={[styles.flexRow, styles.flex1, styles.justifyContentBetween, styles.userSelectNone, styles.alignItemsCenter]}>
+            <View style={[styles.flexRow, styles.flex5, styles.gap3]}>
                 <Avatar
                     source={getDefaultAvatarURL(cardholder.accountID)}
                     avatarID={cardholder.accountID}
@@ -62,7 +62,7 @@ function WorkspaceCardListRow({style, limit, cardholder, lastFourPAN, name, curr
                     </Text>
                 </View>
             </View>
-            <View style={[styles.flexRow, styles.gap2, shouldUseNarrowLayout ? styles.flex2 : styles.flex1, styles.alignItemsCenter, styles.justifyContentEnd]}>
+            <View style={[styles.flexRow, styles.gap2, shouldUseNarrowLayout ? styles.flex2 : styles.flex1, styles.justifyContentEnd]}>
                 <Text
                     numberOfLines={1}
                     style={[styles.textLabelSupporting, styles.lh16]}
@@ -70,7 +70,7 @@ function WorkspaceCardListRow({style, limit, cardholder, lastFourPAN, name, curr
                     {lastFourPAN}
                 </Text>
             </View>
-            <View style={[styles.flexRow, shouldUseNarrowLayout ? styles.flex3 : styles.flex1, styles.gap2, styles.alignItemsCenter, styles.justifyContentEnd]}>
+            <View style={[styles.flexRow, shouldUseNarrowLayout ? styles.flex3 : styles.flex1, styles.gap2, styles.justifyContentEnd]}>
                 <Badge text={CurrencyUtils.convertToDisplayString(limit, currency)} />
             </View>
         </View>
