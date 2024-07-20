@@ -11,6 +11,7 @@ import * as Illustrations from '@components/Icon/Illustrations';
 import type {MenuItemProps} from '@components/MenuItem';
 import MenuItemList from '@components/MenuItemList';
 import OfflineIndicator from '@components/OfflineIndicator';
+import FormHelpMessage from '@components/FormHelpMessage';
 import SafeAreaConsumer from '@components/SafeAreaConsumer';
 import Text from '@components/Text';
 import useDisableModalDismissOnEscape from '@hooks/useDisableModalDismissOnEscape';
@@ -96,26 +97,27 @@ function BaseOnboardingPurpose({shouldUseNativeStyles, shouldEnableMaxHeight, on
             iconWidth: variables.menuIconSize,
             iconHeight: variables.menuIconSize,
             iconStyles: [styles.mh3],
-            wrapperStyle: [styles.purposeMenuItem, isSelected && styles.purposeMenuItemSelected],
+            wrapperStyle: [styles.purposeMenuItem],
             hoverAndPressStyle: [styles.purposeMenuItemSelected],
-            rightComponent: selectedCheckboxIcon,
-            shouldShowRightComponent: isSelected,
             numberOfLinesTitle: 0,
             onPress: () => {
                 Welcome.setOnboardingPurposeSelected(choice);
                 setErrorMessage('');
+                
+                if (choice === CONST.ONBOARDING_CHOICES.MANAGE_TEAM) {
+                    Navigation.navigate(ROUTES.ONBOARDING_WORK);
+                    return;
+                }
+        
+                Navigation.navigate(ROUTES.ONBOARDING_PERSONAL_DETAILS);
             },
         };
     });
     const isFocused = useIsFocused();
 
     const handleOuterClick = useCallback(() => {
-        if (!selectedPurpose) {
-            setErrorMessage(translate('onboarding.purpose.errorSelection'));
-        } else {
-            setErrorMessage(translate('onboarding.purpose.errorContinue'));
-        }
-    }, [selectedPurpose, setErrorMessage, translate]);
+        setErrorMessage(translate('onboarding.purpose.errorSelection'));
+    }, [setErrorMessage, translate]);
 
     const onboardingLocalRef = useRef<TOnboardingRef>(null);
     useImperativeHandle(isFocused ? OnboardingRefManager.ref : onboardingLocalRef, () => ({handleOuterClick}), [handleOuterClick]);
@@ -142,22 +144,11 @@ function BaseOnboardingPurpose({shouldUseNativeStyles, shouldEnableMaxHeight, on
                             />
                         </View>
                     </ScrollView>
-                    <FormAlertWithSubmitButton
-                        enabledWhenOffline
-                        footerContent={isSmallScreenWidth && PurposeFooterInstance}
-                        buttonText={translate('common.continue')}
-                        onSubmit={() => {
-                            if (!selectedPurpose) {
-                                setErrorMessage(translate('onboarding.purpose.errorSelection'));
-                                return;
-                            }
-                            setErrorMessage('');
-                            saveAndNavigate();
-                        }}
-                        message={errorMessage}
-                        isAlertVisible={!!errorMessage}
-                        containerStyles={[styles.w100, styles.mb5, styles.mh0, paddingHorizontal]}
-                    />
+                    <View style={[styles.w100, styles.mb5, styles.mh0, paddingHorizontal]}>
+                        <FormHelpMessage message={errorMessage} />
+                    </View>
+
+                    {isSmallScreenWidth && <OfflineIndicator />}
                 </View>
             )}
         </SafeAreaConsumer>
