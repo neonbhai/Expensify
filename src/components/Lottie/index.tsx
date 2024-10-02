@@ -73,7 +73,9 @@ function Lottie({source, webStyle, shouldLoadAfterInteractions, ...props}: Props
             const state = navigationContainerRef.getRootState();
             const targetRouteName = state?.routes?.[state?.index ?? 0]?.name;
             if (!isSideModalNavigator(targetRouteName)) {
-                setHasNavigatedAway(true);
+                InteractionManager.runAfterInteractions(() => {
+                    setHasNavigatedAway(true);
+                });
             }
         });
         return unsubscribeNavigationBlur;
