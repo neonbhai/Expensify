@@ -253,23 +253,24 @@ function ExpensifyCardPage({
                             </>
                         ))}
                         {physicalCards.map((card) => {
-                            if (card.state !== CONST.EXPENSIFY_CARD.STATE.OPEN) {
-                                return null;
-                            }
                             return (
                                 <>
-                                    <MenuItemWithTopDescription
-                                        description={translate('cardPage.physicalCardNumber')}
-                                        title={maskCard(card?.lastFourPAN)}
-                                        interactive={false}
-                                        titleStyle={styles.walletCardNumber}
-                                    />
-                                    <MenuItem
-                                        title={translate('reportCardLostOrDamaged.report')}
-                                        icon={Expensicons.Flag}
-                                        shouldShowRightIcon
-                                        onPress={() => Navigation.navigate(ROUTES.SETTINGS_WALLET_REPORT_CARD_LOST_OR_DAMAGED.getRoute(String(card.cardID)))}
-                                    />
+                                    {card?.state === CONST.EXPENSIFY_CARD.STATE.OPEN && (
+                                        <MenuItemWithTopDescription
+                                            description={translate('cardPage.physicalCardNumber')}
+                                            title={maskCard(card?.lastFourPAN)}
+                                            interactive={false}
+                                            titleStyle={styles.walletCardNumber}
+                                        />
+                                    )}
+                                    {card?.state !== CONST.EXPENSIFY_CARD.STATE.STATE_NOT_ISSUED && (
+                                        <MenuItem
+                                            title={translate('reportCardLostOrDamaged.report')}
+                                            icon={Expensicons.Flag}
+                                            shouldShowRightIcon
+                                            onPress={() => Navigation.navigate(ROUTES.SETTINGS_WALLET_REPORT_CARD_LOST_OR_DAMAGED.getRoute(String(card.cardID)))}
+                                        />
+                                    )}
                                 </>
                             );
                         })}
