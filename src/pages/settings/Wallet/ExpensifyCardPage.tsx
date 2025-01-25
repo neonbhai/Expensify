@@ -18,7 +18,7 @@ import useNetwork from '@hooks/useNetwork';
 import useThemeStyles from '@hooks/useThemeStyles';
 import {setDraftValues} from '@libs/actions/FormActions';
 import {requestValidateCodeAction} from '@libs/actions/User';
-import {formatCardExpiration, getDomainCards, maskCard} from '@libs/CardUtils';
+import {formatCardExpiration, getDomainCards, isCardIssued, maskCard} from '@libs/CardUtils';
 import {convertToDisplayString} from '@libs/CurrencyUtils';
 import {getUpdatedDraftValues, getUpdatedPrivatePersonalDetails, goToNextPhysicalCardRoute} from '@libs/GetPhysicalCardUtils';
 import Navigation from '@libs/Navigation/Navigation';
@@ -263,7 +263,7 @@ function ExpensifyCardPage({
                                             titleStyle={styles.walletCardNumber}
                                         />
                                     )}
-                                    {card?.state !== CONST.EXPENSIFY_CARD.STATE.STATE_NOT_ISSUED && (
+                                    {isCardIssued(card) && (
                                         <MenuItem
                                             title={translate('reportCardLostOrDamaged.report')}
                                             icon={Expensicons.Flag}
